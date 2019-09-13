@@ -2,15 +2,15 @@ package ClassTwo;
 
 public class Pen {
     //ATTRIBUTES
-    String model;
-    String color;
-    float tip;
-    int load;
-    boolean covered;
+    public String model;
+    public String color;
+    private float tip;
+    protected int load;
+    private boolean covered;
 
     //METHODS
 
-    void status() {
+    public void status() {
         System.out.println("Model is " + this.model);
         System.out.println("The color pen is " + this.color);
         System.out.println("Tip size is " + this.tip);
@@ -18,7 +18,11 @@ public class Pen {
         System.out.println("Is Covered? " + this.covered);
     }
 
-    void scribble() {
+    private void write() {
+
+    }
+
+    public void scribble() {
         if(this.covered == true) {
             System.out.println("ERROR. Can't scribble!");
         }
@@ -28,11 +32,11 @@ public class Pen {
 
     }
 
-    void cover() {
+    public void cover() {
         this.covered = true;
     }
 
-    void uncover() {
+    public void uncover() {
         this.covered = false;
     }
 }
