@@ -4,41 +4,38 @@ public class RemoteControl implements Controller {
     //Attributes
     private int volume;
     private boolean on;
-    private boolean touching;
-
-    public RemoteControl() {
-    }
+    private boolean playing;
 
     //Special Method
-    public void constructor() {
+    public RemoteControl() {
         this.volume = 50;
         this.on = true;
-        this.touching = false;
+        this.playing = false;
 
     }
 
     private int getVolume() {
-        return this.volume;
+        return volume;
     }
 
     private void setVolume(int v) {
-        this.volume = getVolume() + v;
+        this.volume = v;
     }
 
     private boolean getOn() {
-        return this.on;
+        return on;
     }
 
     private void setOn(boolean o) {
         this.on = o;
     }
 
-    private boolean getTouching() {
-        return this.touching;
+    private boolean getPlaying() {
+        return this.playing;
     }
 
-    private void setTouching(boolean t) {
-        this.setTouching(t);
+    private void setPlaying(boolean t) {
+        this.playing = t;
     }
 
     //Methods Abstracts
@@ -54,59 +51,72 @@ public class RemoteControl implements Controller {
 
     @Override
     public void openMenu() {
+        System.out.println("===== MENU =====");
         System.out.println("Is on? " + this.getOn());
-        System.out.println("Is Touching? " + this.getOn());
+        System.out.println("Is playing? " + this.getPlaying());
+        System.out.println("Volume: " + this.getVolume());
 
         for (int i = 0; i <= this.getVolume(); i += 10) {
-            System.out.println("|");
+            System.out.print(" | ");
         }
-        System.out.println("Volume: " + this.getVolume());
     }
 
     @Override
     public void closeMenu() {
-        System.out.println("Closing the Menu.");
+        System.out.println("Closing the Menu...");
     }
 
     @Override
     public void turnUp() {
-        if (this.getOn() == true) {
-            this.setVolume(this.getVolume() + 1);
+        if (this.getOn()) {
+            this.setVolume(this.getVolume() + 5);
+        } else {
+            System.out.println("Can't you turn up ...");
         }
     }
 
     @Override
     public void turnDown() {
-        if (this.getOn() == false) {
-            this.setVolume(this.getVolume() - 1);
+        if (this.getOn()) {
+            this.setVolume(this.getVolume() - 5);
+        } else {
+            System.out.println("Can't you turn down...");
         }
     }
 
     @Override
     public void turnOnMute() {
-        if (this.getOn() == true && this.getVolume() > 0) {
+        if (this.getOn() && this.getVolume() > 0) {
             this.setVolume(0);
+        } else {
+            System.out.println("Can't you turn on mute....");
         }
     }
 
     @Override
     public void turnOffMute() {
-        if (this.getOn() == false && this.getVolume() == 0) {
+        if (this.getOn() && this.getVolume() == 0) {
             this.setVolume(50);
+        } else {
+            System.out.println("Can't you turn off mute...");
         }
     }
 
     @Override
     public void play() {
-        if (this.getOn() && !(this.getTouching())) {
-            this.setTouching(true);
+        if (this.getOn() && !(this.getPlaying())) {
+            this.setPlaying(true);
+        } else {
+            System.out.println("Can't you play now...");
         }
     }
 
     @Override
     public void pause() {
-        if (this.getOn() && this.getTouching()) {
-            this.setTouching(false);
+        if (this.getOn() && this.getPlaying()) {
+            this.setPlaying(false);
+        } else {
+            System.out.println("Can't you pause now ...");
         }
     }
 }
